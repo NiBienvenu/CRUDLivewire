@@ -13,7 +13,8 @@ class Contacts extends Model
         'name', 
         'prenom', 
         'adresse', 
-        'numero', 
+        'numero',
+        'profil', 
         'description'
     ];
 

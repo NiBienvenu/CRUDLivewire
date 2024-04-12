@@ -1,4 +1,4 @@
-<form>
+<form wire:submit.prevent="store" enctype="multipart/form-data">
     <div class="form-group mb-3">
         <label for="Name">Name:</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="Name" placeholder="Taper le nom"
@@ -23,6 +23,13 @@
             placeholder="Taper votre numero" wire:model="numero">
         @error('numero') <span class="text-danger">{{ $message }}</span>@enderror
     </div>
+
+    <div class="form-group mb-3">
+        <label for="Profil">Profil:</label>
+        <input type="file" class="form-control @error('profil') is-invalid @enderror" id="Profil"
+            placeholder="Votre profil" wire:model="profil">
+        @error('profil') <span class="text-danger">{{ $message }}</span>@enderror
+    </div>
     <div class="form-group mb-3">
         <label for="Description">Description:</label>
         <textarea class="form-control @error('description') is-invalid @enderror" id="Description"
@@ -30,6 +37,6 @@
         @error('description') <span class="text-danger">{{ $message }}</span>@enderror
     </div>
     <div class="d-grid gap-2">
-        <button wire:click.prevent="store()" class="btn btn-success btn-block">Save</button>
+        <button type="submit" class="btn btn-success btn-block">Save</button>
     </div>
 </form>

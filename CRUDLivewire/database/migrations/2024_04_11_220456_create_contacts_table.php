@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("prenom")->nullable();
             $table->string("adresse")->nullable();
             $table->string("numero")->nullable();
+            $table->string("profil")->nullable();
             $table->string("description")->nullable();
             $table->timestamps();
         });

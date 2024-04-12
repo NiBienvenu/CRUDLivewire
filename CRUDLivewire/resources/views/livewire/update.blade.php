@@ -1,6 +1,6 @@
 <form>
     <input type="hidden" wire:model="contact_id">
-    <div class="form-group mb-3">
+    <div class="form-group mb-3 ">
         <label for="Name">Name:</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="Name" placeholder="Taper le nom"
             wire:model="name">

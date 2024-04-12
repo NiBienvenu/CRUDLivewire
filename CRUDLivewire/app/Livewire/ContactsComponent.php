@@ -3,11 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Contacts ;
 
 class ContactsComponent extends Component
 {
-    public $contacts, $name,$prenom,$adresse,$numero, $description, $contact_id;
+    use WithFileUploads;
+    public $contacts, $name,$prenom,$adresse,$numero,$profil, $description, $contact_id;
     public $updateContact = false;
 
     protected $listeners = [
@@ -26,7 +28,7 @@ class ContactsComponent extends Component
 
     public function render()
     {
-        $this->contacts = Contacts::select('id','name','prenom','adresse','numero','description')->get();
+        $this->contacts = Contacts::select('id','name','prenom','adresse','numero','profil','description')->get();
         
         return view('livewire.contacts-component');
     }
@@ -39,8 +41,17 @@ class ContactsComponent extends Component
         $this->description = '';
     }
 
+   
     public function store(){
         $this->validate();
+
+        // $imagePath = $this->profil->store('profil', 'public');
+        $uploadedImage = $this->profil->store('images', 'public');
+
+		// $image = time() . '.' . $profil->getClientOriginalExtension();
+		$this->profil->storeAs('public/images', $profil);
+
+
 
         try{
             Contacts::create([
@@ -48,6 +59,7 @@ class ContactsComponent extends Component
                 'prenom'=>$this->prenom, 
                 'adresse'=>$this->adresse, 
                 'numero'=>$this->numero,
+                'profil'=> $uploadedImage,
                 'description'=>$this->description
             ]);
     
@@ -56,7 +68,7 @@ class ContactsComponent extends Component
             $this->resetFields();
         }catch(\Exception $e){
         
-            
+            dd($e);
             $this->resetFields();
         }
     }
@@ -87,7 +99,7 @@ class ContactsComponent extends Component
                 'name'=>$this->name,
                 'prenom'=>$this->prenom, 
                 'adresse'=>$this->adresse, 
-                'numero'=>$this->numero, 
+                'numero'=>$this->numero,
                 'description'=>$this->description
             ])->save();
           

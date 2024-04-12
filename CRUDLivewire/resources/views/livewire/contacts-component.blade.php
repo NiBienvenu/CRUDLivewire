@@ -27,55 +27,45 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Prenom</th>
-                                <th>Adresse</th>
-                                <th>Numero</th>
-                                <th>Description</th>
-                                <th colspan="2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($contacts) > 0)
-                            @foreach ($contacts as $contact)
-                            <tr>
-                                <td>
-                                    {{$contact->name}}
-                                </td>
-                                <td>
-                                    {{$contact->pernom}}
-                                </td>
-                                <td>
-                                    {{$contact->adresse}}
-                                </td>
-                                <td>
-                                    {{$contact->numero}}
-                                </td>
-                                <td>
-                                    {{$contact->description}}
-                                </td>
-                                <td>
-                                    <button wire:click="edit({{$contact->id}})"
-                                        class="btn btn-primary btn-sm">Modifier</button>
-                                </td>
-                                <td>
-                                    <button onclick="deleteContact({{$contact->id}})"
-                                        class="btn btn-danger btn-sm">Supprimer</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @else
-                            <tr>
-                                <td colspan="3" align="center">
-                                    Aucun contacts
-                                </td>
-                            </tr>
-                            @endif
-                        </tbody>
-                    </table>
+
+
+                    @if (count($contacts) > 0)
+                    @foreach ($contacts as $contact)
+                    <div class="card mb-2 cont">
+                        <div class="row g-0">
+                            <div class="col-md-2">
+                                <center>
+                                    <img src="" height="80px" style="border-radius: 50%;" width="80px" class="p-1"
+                                        alt="...">
+                                </center>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$contact->name}} {{$contact->pernom}}</h5>
+                                    <p class="card-text">{{$contact->numero}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                {{$contact->description}}
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <button wire:click="edit({{$contact->id}})"
+                                    class="btn btn-primary btn-sm">Modifier</button>
+                                <button onclick="deleteContact({{$contact->id}})"
+                                    class="btn btn-danger btn-sm">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @endforeach
+                    @else
+                    <center>
+
+                        Aucun contacts
+                    </center>
+
+                    @endif
+
                 </div>
             </div>
         </div>
