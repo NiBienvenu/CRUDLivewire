@@ -10,13 +10,24 @@ class Contacts extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'prenom', 
-        'adresse', 
+        'name',
+        'prenom',
+        'adresse',
         'numero',
-        'profil', 
+        'profil',
         'description'
     ];
 
-    public $timestamps = true;
+    // public $timestamps = true;
+
+    protected static function boot(){
+        parent::boot();
+
+        static::creating(function(){
+            dd('creating');
+        });
+
+    }
+
+
 }

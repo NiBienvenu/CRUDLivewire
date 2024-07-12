@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::resource('contact',ContactController::class);
+// Route::livewire('/create', 'create');
